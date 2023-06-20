@@ -4,7 +4,6 @@ const app = express()
 
 const mongoose = require('mongoose')
 
-const Person = require('./models/Person')
 
 // forma de ler json /middlewares
 app.use(
@@ -15,6 +14,8 @@ app.use(
 
 app.use(express.json())
 
+
+
 // rota inicial
 app.get('/', (req, res) => {
     //mostrar requisição
@@ -22,7 +23,10 @@ app.get('/', (req, res) => {
     //tornar rota funcional
     res.json({ message: 'save' })
 })
+// rotas da API
+const personRoutes = require('./routes/personRoutes')
 
+app.use('/person', personRoutes)
 
 // entregar uma porta
 mongoose.connect('mongodb+srv://augustocapeto:AoOMeMksHGVTrfTm@apicluster.p7xta03.mongodb.net/bancodaapi?retryWrites=true&w=majority')
